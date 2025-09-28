@@ -1,31 +1,25 @@
 <!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Model Viewer</title>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-    <style>
-        /* กำหนดให้ model-viewer เต็มหน้าจอเพื่อให้โหมด AR ทำงานได้ดี */
-        model-viewer {
-            width: 100vw;
-            height: 100vh;
-            background-color: #ffffff; /* เปลี่ยนพื้นหลังได้ตามต้องการ */
-        }
-    </style>
-</head>
-<body>
+<html>
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
-    <model-viewer 
-        src="ramen.glb"              ios-src="your-model.usdz"        alt="A 3D model in Augmented Reality"
-        ar 
-        ar-modes="webxr scene-viewer quick-look"
-        ar-scale="auto"
-        shadow-intensity="1"
-        camera-controls 
-        touch-action="pan"
-        >
-    </model-viewer>
+<body style='margin : 0px; overflow: hidden;'>
 
+    <a-scene embedded arjs='sourceType: webcam; detectionMode: mono; cameraParametersUrl: data/camera_para.dat; debugUIEnabled: false;'>
+
+        <a-marker type='pattern' url='pattern-QR_Ramen.patt'>
+
+            <a-entity
+                gltf-model="url(ramen.glb)" 
+                scale="0.2 0.2 0.2"
+                rotation="-90 0 0"
+                position="0 0 0" 
+            ></a-entity>
+
+        </a-marker>
+
+        <a-entity camera></a-entity>
+
+    </a-scene>
 </body>
 </html>
